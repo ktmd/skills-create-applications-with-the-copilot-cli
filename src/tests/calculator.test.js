@@ -1,4 +1,4 @@
-const { add, subtract, multiply, divide } = require("../calculator");
+const { add, subtract, multiply, divide, modulo, power, sqrt } = require("../calculator");
 
 // Tests for Addition (+)
 describe("add", () => {
@@ -40,5 +40,39 @@ describe("divide", () => {
   test("divides zero by a number", () => expect(divide(0, 5)).toBe(0));
   test("throws on division by zero", () => {
     expect(() => divide(5, 0)).toThrow("Division by zero is not allowed");
+  });
+});
+
+// Tests for Modulo (%)
+describe("modulo", () => {
+  test("10 modulo 3 = 1", () => expect(modulo(10, 3)).toBe(1));
+  test("modulo of even division is zero", () => expect(modulo(9, 3)).toBe(0));
+  test("modulo with larger divisor", () => expect(modulo(5, 8)).toBe(5));
+  test("modulo with negative dividend", () => expect(modulo(-7, 3)).toBe(-1));
+  test("modulo with decimals", () => expect(modulo(5.5, 2)).toBeCloseTo(1.5));
+  test("throws on modulo by zero", () => {
+    expect(() => modulo(5, 0)).toThrow("Modulo by zero is not allowed");
+  });
+});
+
+// Tests for Exponentiation / Power (**)
+describe("power", () => {
+  test("2 to the power of 3 = 8", () => expect(power(2, 3)).toBe(8));
+  test("power of zero exponent is 1", () => expect(power(5, 0)).toBe(1));
+  test("power of 1 exponent is base", () => expect(power(7, 1)).toBe(7));
+  test("power with negative exponent", () => expect(power(2, -1)).toBe(0.5));
+  test("power of zero base is 0", () => expect(power(0, 5)).toBe(0));
+  test("power with fractional exponent", () => expect(power(4, 0.5)).toBe(2));
+});
+
+// Tests for Square Root (√)
+describe("sqrt", () => {
+  test("square root of 9 = 3", () => expect(sqrt(9)).toBe(3));
+  test("square root of 4 = 2", () => expect(sqrt(4)).toBe(2));
+  test("square root of 0 = 0", () => expect(sqrt(0)).toBe(0));
+  test("square root of 2 is irrational", () => expect(sqrt(2)).toBeCloseTo(1.4142));
+  test("square root of 1 = 1", () => expect(sqrt(1)).toBe(1));
+  test("throws on square root of negative number", () => {
+    expect(() => sqrt(-1)).toThrow("Square root of a negative number is not allowed");
   });
 });
